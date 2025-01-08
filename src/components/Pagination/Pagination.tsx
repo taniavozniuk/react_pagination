@@ -22,9 +22,8 @@ export const Pagination: React.FC<PaginationProps> = ({
           data-cy="prevLink"
           className="page-link"
           href="#prev"
-          aria-disabled="true"
           onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          aria-disabled={currentPage === 1}
         >
           «
         </a>
@@ -47,60 +46,32 @@ export const Pagination: React.FC<PaginationProps> = ({
           </a>
         </li>
       ))}
-      <li className="page-item active">
-        <a data-cy="pageLink" className="page-link" href="#1">
-          1
-        </a>
-      </li>
-      <li className="page-item">
-        <a data-cy="pageLink" className="page-link" href="#2">
-          2
-        </a>
-      </li>
-      <li className="page-item">
-        <a data-cy="pageLink" className="page-link" href="#3">
-          3
-        </a>
-      </li>
-      <li className="page-item">
-        <a data-cy="pageLink" className="page-link" href="#4">
-          4
-        </a>
-      </li>
-      <li className="page-item">
-        <a data-cy="pageLink" className="page-link" href="#5">
-          5
-        </a>
-      </li>
-      <li className="page-item">
-        <a data-cy="pageLink" className="page-link" href="#6">
-          6
-        </a>
-      </li>
-      <li className="page-item">
-        <a data-cy="pageLink" className="page-link" href="#7">
-          7
-        </a>
-      </li>
-      <li className="page-item">
-        <a data-cy="pageLink" className="page-link" href="#8">
-          8
-        </a>
-      </li>
-      <li className="page-item">
-        <a data-cy="pageLink" className="page-link" href="#9">
-          9
-        </a>
-      </li>
-      <li className="page-item">
+      <li
+        className={`page-item ${currentPage === totalPage ? 'disabled' : ''}`}
+      >
         <a
           data-cy="nextLink"
           className="page-link"
           href="#next"
-          aria-disabled="false"
+          onClick={e => {
+            e.preventDefault();
+            if (currentPage < totalPage) {
+              onPageChange(currentPage + 1);
+            }
+          }}
+          aria-disabled={currentPage === totalPage}
         >
           »
         </a>
+        {/* <a
+          data-cy="prevLink"
+          className="page-link"
+          href="#prev"
+          onClick={() => onPageChange(currentPage - 1)}
+          aria-disabled={currentPage === 1}
+        >
+          «
+        </a> */}
       </li>
     </ul>
   );
