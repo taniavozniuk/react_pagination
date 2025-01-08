@@ -15,6 +15,14 @@ export const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const totalPage = Math.ceil(total / prePage);
 
+  const prevLinkHandler = () => {
+    if (currentPage === 1) {
+      return;
+    }
+
+    onPageChange(currentPage - 1);
+  };
+
   return (
     <ul className="pagination">
       <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
@@ -22,7 +30,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           data-cy="prevLink"
           className="page-link"
           href="#prev"
-          onClick={() => onPageChange(currentPage - 1)}
+          onClick={prevLinkHandler}
           aria-disabled={currentPage === 1}
         >
           «
